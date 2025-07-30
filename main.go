@@ -1,14 +1,23 @@
 package main
 
 import (
-	"github.com/tkrajina/gofr"
-	"your-module-name/handlers"
+	"fmt"
+	"log"
+
+	"your-module-path/utils" // adjust this to your module name
 )
 
 func main() {
-	app := gofr.New()
+	err := utils.CSVToJSON("sample.csv", "output.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("CSV to JSON done.")
 
-	app.POST("/upload", handlers.UploadHandler)
-
-	app.Start()
+	err = utils.JSONToCSV("output.json", "output.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("JSON to CSV done.")
 }
+
